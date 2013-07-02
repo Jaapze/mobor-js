@@ -85,7 +85,7 @@ $(function(){
 		$.get(URL, function(data) {
 			var html 	=	$(data);
 			var role	=	$(html.filter(".content")).data('role');
-			
+
 			switch(role){
 				case 'page':
 					$(BODY).append(html.filter(".content"));
