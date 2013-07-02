@@ -10,8 +10,16 @@ $(function(){
 	
 	function init(){
 		add_classes('page');
+		
+		//set functions for execute the loading function from external file
+		window.start_loading = function(){ 
+			loading(true);
+		}
+		window.end_loading = function(){ 
+			loading(true);
+		}
 	}
-	
+
 	function loading(load)
 	{
 		if(load){
@@ -70,8 +78,8 @@ $(function(){
 		});
 		$.get(URL, function(data) {
 			var html 	=	$(data);
-			var kind	=	$(html.filter(".content")).data('role');
-			if(kind == 'page'){
+			var role	=	$(html.filter(".content")).data('role');
+			if(role == 'page'){
 				$(BODY).append(html.filter(".content"));
 				add_classes('next_page');
 				switch (transition) { 
@@ -85,15 +93,16 @@ $(function(){
 						trans_none();
 					break;
 				}
-			}else if(kind == 'dialog'){
+			}else if(role == 'dialog'){
 				open_dialog(html, transition);
-			}else if(kind == 'lightbox'){
+			}else if(role == 'lightbox'){
 				open_lightbox(html, transition);
 			}
 			loading(false);
 			$.event.trigger({
 				type: "page_loaded",
 				page: URL,
+				role: role,
 			});
 		});
 	}
