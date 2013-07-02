@@ -64,7 +64,10 @@ $(function(){
 			var URL			=	elm.data('url');
 		}
 		loading(true);
-		
+		$.event.trigger({
+			type: 'page_load',
+			page: URL,
+		});
 		$.get(URL, function(data) {
 			var html 	=	$(data);
 			var kind	=	$(html.filter(".content")).data('role');
@@ -88,6 +91,10 @@ $(function(){
 				open_lightbox(html, transition);
 			}
 			loading(false);
+			$.event.trigger({
+				type: "page_loaded",
+				page: URL,
+			});
 		});
 	}
 	
