@@ -73,16 +73,15 @@ $(function(){
 	function navigate(elm){
 		var reverse		=	elm.data('direction');
 		var transition	=	elm.data('transition');
-		if(elm.attr('href')){
-			var URL			=	elm.attr('href');
-		}else{
-			var URL			=	elm.data('url');
-		}
+		var URL = (elm.attr('href')) ? elm.attr('href') : elm.data('url');
+		
 		loading(true);
+		
 		$.event.trigger({
 			type: 'page_load',
 			page: URL,
 		});
+		
 		$.get(URL, function(data) {
 			var html 	=	$(data);
 			var role	=	$(html.filter(".content")).data('role');
@@ -105,7 +104,9 @@ $(function(){
 			}else if(role == 'lightbox'){
 				open_lightbox(html, transition);
 			}
+			
 			loading(false);
+			
 			$.event.trigger({
 				type: "page_loaded",
 				page: URL,
@@ -119,8 +120,10 @@ $(function(){
 	{
 		$(BODY).append(overlay);
 		$('body > .overlay').fadeIn(300);
+		
 		$(BODY).append(html.filter(".content"));
 		add_classes('dialog');
+		
 		var contents	=	$('.dialog .contents').html();
 		$('.dialog').append(close_btn);
 		$('.dialog .contents').html('<div class="scroll">'+contents+'</div>');
@@ -139,8 +142,10 @@ $(function(){
 	{
 		$(BODY).append(overlay);
 		$('body > .overlay').fadeIn(300);
+		
 		$(BODY).append(html.filter(".content"));
 		add_classes('lightbox');
+		
 		$('.lightbox').append(close_btn);
 		switch (transition) { 
 			case 'slide':
@@ -156,7 +161,7 @@ $(function(){
 	function trans_slide(reverse)
 	{
 		var slide;
-		if(reverse){var slide	=	'reverse_slide';}else{var slide	=	'slide';}
+		var slide	= (reverse) ? 'reverse_slide' : 'slide';
 		$('.page.next').show().addClass(slide);
 		$('.page.current').addClass(slide).addClass('remove');
 		$('.page.next.'+slide).bind('animationend webkitAnimationEnd MSAnimationEnd oAnimationEnd', function(e){
