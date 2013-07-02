@@ -1,4 +1,4 @@
-MOBAR JS 0.1
+MOBOR JS 0.1
 -------------
 
 Javascript tool to make a web app
