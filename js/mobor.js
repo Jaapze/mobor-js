@@ -35,19 +35,26 @@ $(function(){
 	}
 	
 	function add_classes(role){
-		if(role == 'page'){
-			var selector	=	'div[data-role="page"]';
-			var add_class	=	'page current';
-		}else if(role == 'next_page'){
-			var selector	=	'div[data-role="page"]:not(.current)';
-			var add_class	=	'page next';
-		}else if(role == 'dialog'){
-			var selector	=	'div[data-role="dialog"]';
-			var add_class	=	'dialog';
-		}else if(role == 'lightbox'){
-			var selector	=	'div[data-role="lightbox"]';
-			var add_class	=	'lightbox';
+		var selector, add_class;
+		switch(role){
+			case 'page':
+				selector	=	'div[data-role="page"]';
+				add_class	=	'page current';
+			break;
+			case 'next_page':
+				selector	=	'div[data-role="page"]:not(.current)';
+				add_class	=	'page next';
+			break;
+			case 'dialog':
+				selector	=	'div[data-role="dialog"]';
+				add_class	=	'dialog';
+			break;
+			case 'lightbox':
+				selector	=	'div[data-role="lightbox"]';
+				add_class	=	'lightbox';
+			break;
 		}
+		
 		$(selector).each(function(){
 			var elm		=	$(this);
 			var theme	=	elm.data('theme');
