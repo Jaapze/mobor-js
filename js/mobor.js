@@ -85,24 +85,29 @@ $(function(){
 		$.get(URL, function(data) {
 			var html 	=	$(data);
 			var role	=	$(html.filter(".content")).data('role');
-			if(role == 'page'){
-				$(BODY).append(html.filter(".content"));
-				add_classes('next_page');
-				switch (transition) { 
-					case 'slide':
-						trans_slide(reverse);
-					break;
-					case 'fade':
-						trans_fade();
-					break;
-					default:
-						trans_none();
-					break;
-				}
-			}else if(role == 'dialog'){
-				open_dialog(html, transition);
-			}else if(role == 'lightbox'){
-				open_lightbox(html, transition);
+			
+			switch(role){
+				case 'page':
+					$(BODY).append(html.filter(".content"));
+					add_classes('next_page');
+					switch (transition) { 
+						case 'slide':
+							trans_slide(reverse);
+						break;
+						case 'fade':
+							trans_fade();
+						break;
+						default:
+							trans_none();
+						break;
+					}
+				break;
+				case 'dialog':
+					open_dialog(html, transition);
+				break;
+				case 'lightbox':
+					open_lightbox(html, transition);
+				break;
 			}
 			
 			loading(false);
