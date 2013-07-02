@@ -1,3 +1,7 @@
-Mobile Motor (Mobar)
+MOBAR JS 0.1
+-------------
 
-Written in Javascript for web apps.
+Javascript tool to make a web app
+
+Demo can be found here:
+http://www.atticweb.nl/mobar-js
