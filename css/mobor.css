@@ -1,5 +1,6 @@
-body{
+body, html{
 	color: #666;
+	overflow: hidden;
 }
 a{
 	color: #666;
