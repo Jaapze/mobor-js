@@ -37,8 +37,8 @@ body > .overlay{
 	z-index: 3;
 	display: none;
 }
-
-/*dialog*/
+ 
+/* dialog */
 @-webkit-keyframes dialog_slide {
   0%{
 	transform: translate(0,-120%);
@@ -132,8 +132,9 @@ body > .overlay{
 	z-index: 4;
 	cursor: pointer;
 }
+/* [end] dialog */
 
-/*lightbox*/
+/* lightbox */
 @-webkit-keyframes lightbox_slide {
   0%{
 	transform: translate(0,-120%);
@@ -215,7 +216,9 @@ body > .overlay{
 	z-index: 4;
 	cursor: pointer;
 }
-/*header*/
+/* [end] lightbox */
+
+/* header */
 .page > .header{
 	position:absolute;
 	top: 0;
@@ -235,8 +238,9 @@ body > .overlay{
 	top: 5px;
 	right: 5px;
 }
+/* [end] header*/
 
-/*page*/
+/* page */
 .page{
 	position: absolute;
 	width: 100%;
@@ -263,8 +267,9 @@ body > .overlay{
 	right: 10px;
 	bottom: 10px;
 }
+/* [end] page */
 
-/*slide animation*/
+/* slide animation */
 
 @-webkit-keyframes slide {
   0%{
@@ -333,5 +338,5 @@ body > .overlay{
 	-o-animation:      slide .5s;
 	animation:         slide .5s;
 }
-/* [end] slide animation*/
+/* [end] slide animation */
  
