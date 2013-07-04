@@ -139,6 +139,9 @@ $(function(){
 			case 'fade':
 				$('.dialog').fadeIn(300);
 			break;
+			default:
+				$('.dialog').show().addClass('slide');
+			break;
 		}
 	}
 	
@@ -158,6 +161,9 @@ $(function(){
 			break;
 			case 'fade':
 				$('.lightbox').fadeIn(300);
+			break;
+			default:
+				$('.lightbox').show().addClass('slide');
 			break;
 		}
 	}
