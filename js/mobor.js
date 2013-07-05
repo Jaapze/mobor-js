@@ -73,13 +73,15 @@ $(function(){
 	function navigate(elm){
 		var reverse		=	elm.data('direction');
 		var transition	=	elm.data('transition');
+		var id			=	elm.data('id');
 		var URL = (elm.attr('href')) ? elm.attr('href') : elm.data('url');
 		
 		loading(true);
 		
 		$.event.trigger({
-			type: 'page_load',
-			page: URL,
+			type:	'page_load',
+			page:	URL,
+			id:		id,
 		});
 		
 		$.get(URL, function(data) {
@@ -113,9 +115,10 @@ $(function(){
 			loading(false);
 			
 			$.event.trigger({
-				type: "page_loaded",
-				page: URL,
-				role: role,
+				type:	"page_loaded",
+				page:	URL,
+				role:	role,
+				id:		id,
 			});
 		});
 	}
