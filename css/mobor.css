@@ -20,12 +20,11 @@ p:first-child{
 	line-height: 60px;
 	margin: -45px 0 0 -45px;
 	z-index: 3;
-	display: none;
 	font-size: 12px;
 	background: #333;
 	color: #fff;
 	text-align: center;
-	opacity: .5;
+	opacity: 0;
 }
 body > .overlay{
 	position: absolute;
@@ -35,7 +34,6 @@ body > .overlay{
 	bottom: 0;
 	background: rgba(0,0,0,.6);
 	z-index: 3;
-	display: none;
 }
  
 /* dialog */
@@ -326,17 +324,17 @@ body > .overlay{
 }
 
 .page.next.reverse_slide{
-	-webkit-animation: reverse_slide .5s; 
-	-moz-animation:    reverse_slide .5s;
-	-o-animation:      reverse_slide .5s;
-	animation:         reverse_slide .5s;
+	-webkit-animation: reverse_slide .2s; 
+	-moz-animation:    reverse_slide .2s;
+	-o-animation:      reverse_slide .2s;
+	animation:         reverse_slide .2s;
 }
 
 .page.next.slide{
-	-webkit-animation: slide .5s; 
-	-moz-animation:    slide .5s;
-	-o-animation:      slide .5s;
-	animation:         slide .5s;
+	-webkit-animation: slide .2s; 
+	-moz-animation:    slide .2s;
+	-o-animation:      slide .2s;
+	animation:         slide .2s;
 }
 /* [end] slide animation */
  

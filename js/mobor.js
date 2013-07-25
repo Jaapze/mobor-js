@@ -24,11 +24,12 @@ $(function(){
 	{
 		if(load){
 			BODY.append(loader);
-			$('.loader').fadeIn(300);
+			$('.loader').show().css('opacity', '0').addClass('animated fadeIn');
 			done_loading	=	false;
 		}else{
-			$('.loader').fadeOut(300, function(){
-				$(this).remove();
+			$('.loader').css('opacity', '1').addClass('animated fadeOut');
+			$('.loader').bind('animationend webkitAnimationEnd MSAnimationEnd oAnimationEnd', function(e){
+				$('.loader').remove();
 			});
 			done_loading	=	true;
 		}
@@ -126,8 +127,7 @@ $(function(){
 	/*open the dialog*/
 	function open_dialog(html, transition)
 	{
-		$(BODY).append(overlay);
-		$('body > .overlay').fadeIn(300);
+		open_overlay();
 		
 		$(BODY).append(html.filter(".content"));
 		add_classes('dialog');
@@ -140,7 +140,7 @@ $(function(){
 				$('.dialog').show().addClass('slide');
 			break;
 			case 'fade':
-				$('.dialog').fadeIn(300);
+				$('.dialog').show().css('opacity', '0').addClass('animated fadeIn');
 			break;
 			default:
 				$('.dialog').show().addClass('slide');
@@ -151,8 +151,7 @@ $(function(){
 	/*open the lightbox*/
 	function open_lightbox(html, transition)
 	{
-		$(BODY).append(overlay);
-		$('body > .overlay').fadeIn(300);
+		open_overlay();
 		
 		$(BODY).append(html.filter(".content"));
 		add_classes('lightbox');
@@ -163,12 +162,18 @@ $(function(){
 				$('.lightbox').show().addClass('slide');
 			break;
 			case 'fade':
-				$('.lightbox').fadeIn(300);
+				$('.lightbox').show().css('opacity', '0').addClass('animated fadeIn');
 			break;
 			default:
 				$('.lightbox').show().addClass('slide');
 			break;
 		}
+	}
+	
+	function open_overlay()
+	{
+		$(BODY).append(overlay);
+		$('body > .overlay').removeClass('fadeIn fadeOut animated').show().css('opacity', '0').addClass('animated fadeIn');
 	}
 	
 	/*slide animation*/
@@ -188,7 +193,8 @@ $(function(){
 	function trans_fade()
 	{
 		$('.page.current').addClass('remove');
-		$('.page.next').hide().fadeIn(500, function(){
+		$('.page.next').css('opacity', '0').addClass('animated fadeIn');
+		$('.page.next').bind('animationend webkitAnimationEnd MSAnimationEnd oAnimationEnd', function(e){
 			$('.page.next').removeClass('next').addClass('current');
 			$('.page.remove').remove();
 		});
@@ -221,7 +227,8 @@ $(function(){
 	$(BODY).delegate('.close_btn', 'click', function(){
 		if(done_loading){
 			if(!$(this).parent().hasClass('slide')){
-				$('.dialog,.lightbox').fadeOut(300, function(){
+				$('.dialog,.lightbox').css('opacity', '1').addClass('animated fadeOut');
+				$('.dialog,.lightbox').bind('animationend webkitAnimationEnd MSAnimationEnd oAnimationEnd', function(e){
 					$(this).remove();
 				});
 			}else{
@@ -230,7 +237,8 @@ $(function(){
 					$(this).remove();
 				});
 			}
-			$('body > .overlay').fadeOut(300, function(){
+			$('body > .overlay').css('opacity', '1').addClass('animated fadeOut');
+			$('body > .overlay').bind('animationend webkitAnimationEnd MSAnimationEnd oAnimationEnd', function(e){
 				$(this).remove();
 			})
 		}
