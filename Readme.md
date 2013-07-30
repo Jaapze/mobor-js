@@ -52,7 +52,7 @@ To make a element link to another page u can use a anchor tag:
 ```
 To make a anchor to a website outside of the app, add the class 'external':
 ```html
-<a href="http://www.google.com" class="external">google.com/a>
+<a href="http://www.google.com" class="external">google.com</a>
 ```
 You can also use other elements to link to another page:
 ```html
