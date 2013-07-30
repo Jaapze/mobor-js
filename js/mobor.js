@@ -14,7 +14,13 @@ $(function(){
 		$('.page').addClass('current');
 	}
 	
-	function navigate(URL, transition, direction){
+	jQuery.navigate = function extern_nav(URL, transition, direction) {
+		transition = transition || 'slide';
+		direction = direction || 'forward';
+		navigation(URL, transition, direction);
+	}
+	
+	function navigation(URL, transition, direction){
 		if(navigation_done){
 			$.event.trigger({
 				type:	'page_load',
@@ -93,7 +99,7 @@ $(function(){
 		var transition		=	(typeof attr_trans !== 'undefined' && attr_trans !== false) ? attr_trans : config.defaults.transition;
 		var direction		=	(typeof attr_dir !== 'undefined' && attr_dir !== false) ? attr_dir : config.defaults.direction;
 		
-		navigate(URL, transition, direction);
+		navigation(URL, transition, direction);
 		return false;
 	});
 	
