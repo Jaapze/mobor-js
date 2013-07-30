@@ -62,6 +62,11 @@ You can add data attributes to change the page transition or direction:
 ```html
 <a href="page_2" data-transition="slide" direction="forward">page 2</a>
 ```
+You can also do it with javascript:
+```js
+$.navigate('page-2.html', 'slide', 'forward');
+```
+
 ### Transitions
 - slide (default)
   - forward (default)
