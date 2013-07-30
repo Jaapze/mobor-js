@@ -1,4 +1,5 @@
 $(function(){
+	var current_URL;
 	var navigation_done		=	true;
 	var body				=	$('body');
 	var config				= {
@@ -24,6 +25,7 @@ $(function(){
 				data_elm	=	$(data);
 				html		=	data_elm.filter(".page");
 				if(html.length > 0){
+					current_URL		=	URL;
 					do_transition(transition, direction, html);
 				}else{
 					console.error('no page class found on '+URL);
@@ -69,6 +71,7 @@ $(function(){
 		setTimeout(function(){navigation_done = true;},2);
 		$.event.trigger({
 			type:	'page_loaded',
+			URL:	current_URL,
 		});
 		$('.fadeIn, .transition, .center').removeClass('fadeIn transition center');
 	}
