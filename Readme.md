@@ -36,10 +36,10 @@ http://www.atticweb.nl/mobor-js
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Mobor-js</title>
+	<title>Page</title>
 </head>
 <body>
-	<div class="page" id="index">
+	<div class="page" id="page">
 		
 	</div>
 </body>
