@@ -6,7 +6,45 @@ Tool is build on jquery
 Demo can be found here:
 http://www.atticweb.nl/mobor-js
 
-
+## File structure
+###Index
+```html
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Mobor-js</title>
+	
+	<script src="js/jquery-2.0.3.min.js"></script>
+	<script src="js/mobor.js"></script>
+	<script src="js/script.js"></script>
+	
+	<link rel="stylesheet" href="css/mobor.css">
+	<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+	<div class="page" id="index">
+		
+	</div>
+</body>
+</html>
+```
+###Page
+```html
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Mobor-js</title>
+</head>
+<body>
+	<div class="page" id="index">
+		
+	</div>
+</body>
+</html>
+```
 ## Navigation
 To make a element link to another page u can use a anchor tag:
 ```html
