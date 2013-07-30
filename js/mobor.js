@@ -27,6 +27,10 @@ $(function(){
 				if(html.length > 0){
 					current_URL		=	URL;
 					do_transition(transition, direction, html);
+					$.event.trigger({
+						type:	'page_loaded',
+						URL:	current_URL,
+					});
 				}else{
 					console.error('no page class found on '+URL);
 				}
@@ -70,7 +74,7 @@ $(function(){
 		$('.page').addClass('current');
 		setTimeout(function(){navigation_done = true;},2);
 		$.event.trigger({
-			type:	'page_loaded',
+			type:	'transition_done',
 			URL:	current_URL,
 		});
 		$('.fadeIn, .transition, .center').removeClass('fadeIn transition center');

@@ -1,4 +1,4 @@
-# MOBOR JS 0.1
+# MOBOR JS 0.1.1
 Javascript tool to make a web app
 
 Tool is build on jquery 2.X
@@ -76,6 +76,9 @@ Triggers when a page is loading.
 
 #####page_loaded
 triggers when a page is loaded.
+
+#####transition_done
+triggers when the transition of the page is done
 
 you can get the URL from this events with the 'URL' param
 
