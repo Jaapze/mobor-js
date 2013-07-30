@@ -1,248 +1,91 @@
 $(function(){
-	var BODY			=	$('body');
-	var loader			=	$('<div class="loader">LOADING</div>');
-	var overlay			=	$('<div class="overlay"></div>');
-	var close_btn		=	$('<div class="close_btn">x</div>');
-	
-	var done_loading	=	true;
+	var navigation_done		=	true;
+	var body				=	$('body');
+	var config				= {
+		'defaults':		{
+			'direction':	'forward',
+			'transition':	'slide',
+		},
+	};
 	
 	init();
-	
 	function init(){
-		add_classes('page');
-		
-		//set functions for execute the loading function from external file
-		window.start_loading = function(){ 
-			loading(true);
-		}
-		window.end_loading = function(){ 
-			loading(true);
-		}
-	}
-
-	function loading(load)
-	{
-		if(load){
-			BODY.append(loader);
-			$('.loader').show().css('opacity', '0').addClass('animated fadeIn');
-			done_loading	=	false;
-		}else{
-			$('.loader').css('opacity', '1').addClass('animated fadeOut');
-			$('.loader').bind('animationend webkitAnimationEnd MSAnimationEnd oAnimationEnd', function(e){
-				$('.loader').remove();
-			});
-			done_loading	=	true;
-		}
+		$('.page').addClass('current');
 	}
 	
-	function add_classes(role){
-		var selector, add_class;
-		switch(role){
-			case 'page':
-				selector	=	'div[data-role="page"]';
-				add_class	=	'page current';
-			break;
-			case 'next_page':
-				selector	=	'div[data-role="page"]:not(.current)';
-				add_class	=	'page next';
-			break;
-			case 'dialog':
-				selector	=	'div[data-role="dialog"]';
-				add_class	=	'dialog';
-			break;
-			case 'lightbox':
-				selector	=	'div[data-role="lightbox"]';
-				add_class	=	'lightbox';
-			break;
-		}
-		
-		$(selector).each(function(){
-			var elm		=	$(this);
-			var theme	=	elm.data('theme');
-			var title	=	elm.data('title');
-			
-			if(theme){
-				elm.addClass('theme_'+theme);
-			}
-			if(title){
-				elm.attr('id', title);
-			}
-			elm.addClass(add_class);
-		});
-	}
-	
-	function navigate(elm){
-		var reverse		=	elm.data('direction');
-		var transition	=	elm.data('transition');
-		var id			=	elm.data('id');
-		var URL = (elm.attr('href')) ? elm.attr('href') : elm.data('url');
-		
-		loading(true);
-		
-		$.event.trigger({
-			type:	'page_load',
-			page:	URL,
-			id:		id,
-		});
-		
-		$.get(URL, function(data) {
-			var html 	=	$(data);
-			var role	=	$(html.filter(".content")).data('role');
-
-			switch(role){
-				case 'page':
-					$(BODY).append(html.filter(".content"));
-					add_classes('next_page');
-					switch (transition) { 
-						case 'slide':
-							trans_slide(reverse);
-						break;
-						case 'fade':
-							trans_fade();
-						break;
-						default:
-							trans_none();
-						break;
-					}
-				break;
-				case 'dialog':
-					open_dialog(html, transition);
-				break;
-				case 'lightbox':
-					open_lightbox(html, transition);
-				break;
-			}
-			
-			loading(false);
-			
+	function navigate(URL, transition, direction){
+		if(navigation_done){
 			$.event.trigger({
-				type:	"page_loaded",
-				page:	URL,
-				role:	role,
-				id:		id,
+				type:	'page_load',
+				URL:	URL,
 			});
-		});
+			var data_elm,html	=	null;
+			$.get(URL, function(data) {
+				data_elm	=	$(data);
+				html		=	data_elm.filter(".page");
+				if(html.length > 0){
+					do_transition(transition, direction, html);
+				}else{
+					console.error('no page class found on '+URL);
+				}
+			});
+		}
 	}
 	
-	/*open the dialog*/
-	function open_dialog(html, transition)
-	{
-		open_overlay();
-		
-		$(BODY).append(html.filter(".content"));
-		add_classes('dialog');
-		
-		var contents	=	$('.dialog .contents').html();
-		$('.dialog').append(close_btn);
-		$('.dialog .contents').html('<div class="scroll">'+contents+'</div>');
-		switch (transition) { 
+	function do_transition(transition, direction, html){
+		navigation_done		=	false;
+		switch(transition){
 			case 'slide':
-				$('.dialog').show().addClass('slide');
+				var from	=	(direction == 'forward')?'right':'left';
+				var to		=	(direction != 'forward')?'right':'left';
+				body.append(html.addClass(from));
+				setTimeout(function(){
+					html.removeClass(from).addClass('transition center');
+					$('.current').removeClass('current').addClass(to+' transition remove').removeClass('center');
+				},1);
 			break;
 			case 'fade':
-				$('.dialog').show().css('opacity', '0').addClass('animated fadeIn');
+				body.append(html);
+				$('.current').removeClass('current').addClass('remove');
+				html.addClass('fadeIn current transition');
 			break;
-			default:
-				$('.dialog').show().addClass('slide');
-			break;
+		}
+		if(transition == 'slide')
+		{
+			$('.page.current').one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function(e) {
+				reset_pages();
+			});
+		}else{
+			$('.page.current').one('animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd', function(e) {
+				reset_pages();
+			});
 		}
 	}
 	
-	/*open the lightbox*/
-	function open_lightbox(html, transition)
+	function reset_pages()
 	{
-		open_overlay();
-		
-		$(BODY).append(html.filter(".content"));
-		add_classes('lightbox');
-		
-		$('.lightbox').append(close_btn);
-		switch (transition) { 
-			case 'slide':
-				$('.lightbox').show().addClass('slide');
-			break;
-			case 'fade':
-				$('.lightbox').show().css('opacity', '0').addClass('animated fadeIn');
-			break;
-			default:
-				$('.lightbox').show().addClass('slide');
-			break;
-		}
-	}
-	
-	function open_overlay()
-	{
-		$(BODY).append(overlay);
-		$('body > .overlay').removeClass('fadeIn fadeOut animated').show().css('opacity', '0').addClass('animated fadeIn');
-	}
-	
-	/*slide animation*/
-	function trans_slide(reverse)
-	{
-		var slide;
-		var slide	= (reverse) ? 'reverse_slide' : 'slide';
-		$('.page.next').show().addClass(slide);
-		$('.page.current').addClass(slide).addClass('remove');
-		$('.page.next.'+slide).bind('animationend webkitAnimationEnd MSAnimationEnd oAnimationEnd', function(e){
-			$('.page.next').removeClass('next reverse_slide slide').addClass('current');
-			$('.page.remove').remove();
+		$('.remove').remove();
+		$('.page').addClass('current');
+		navigation_done		=	true;
+		$.event.trigger({
+			type:	'page_loaded',
 		});
+		$('.fadeIn, .transition, .center').removeClass('fadeIn transition center');
 	}
 	
-	/*fade animation*/
-	function trans_fade()
-	{
-		$('.page.current').addClass('remove');
-		$('.page.next').css('opacity', '0').addClass('animated fadeIn');
-		$('.page.next').bind('animationend webkitAnimationEnd MSAnimationEnd oAnimationEnd', function(e){
-			$('.page.next').removeClass('next').addClass('current');
-			$('.page.remove').remove();
-		});
-	}
-	
-	/*no animation*/
-	function trans_none()
-	{
-		$('.page.current').addClass('remove');
-		$('.page.next').show();
-		$('.page.next').removeClass('next').addClass('current');
-		$('.page.remove').remove();
-	}
-	
-	function reset(elm)
-	{
-		elm.html('');
-	}
-	
-	
-	/*navigation click*/
-	$(BODY).delegate('[data-role="navigate"]', 'click', function(){
-		if(done_loading){
-			navigate($(this));
-		}
+	$('body').delegate('a, .navigate', 'click', function(){
+		var elm				=	$(this);
+		
+		var attr_href		=	elm.attr('href');
+		var attr_trans		=	elm.data('transition');
+		var attr_dir		=	elm.data('direction');
+		
+		var URL				=	(typeof attr_href !== 'undefined' && attr_href !== false) ? attr_href : elm.data('url');
+		var transition		=	(typeof attr_trans !== 'undefined' && attr_trans !== false) ? attr_trans : config.defaults.transition;
+		var direction		=	(typeof attr_dir !== 'undefined' && attr_dir !== false) ? attr_dir : config.defaults.direction;
+		
+		navigate(URL, transition, direction);
 		return false;
 	});
 	
-	/*close dialog*/
-	$(BODY).delegate('.close_btn', 'click', function(){
-		if(done_loading){
-			if(!$(this).parent().hasClass('slide')){
-				$('.dialog,.lightbox').css('opacity', '1').addClass('animated fadeOut');
-				$('.dialog,.lightbox').bind('animationend webkitAnimationEnd MSAnimationEnd oAnimationEnd', function(e){
-					$(this).remove();
-				});
-			}else{
-				$('.dialog,.lightbox').removeClass('slide').addClass('slide_up');
-				$('.dialog.slide_up,.lightbox.slide_up').bind('animationend webkitAnimationEnd MSAnimationEnd oAnimationEnd', function(e){
-					$(this).remove();
-				});
-			}
-			$('body > .overlay').css('opacity', '1').addClass('animated fadeOut');
-			$('body > .overlay').bind('animationend webkitAnimationEnd MSAnimationEnd oAnimationEnd', function(e){
-				$(this).remove();
-			})
-		}
-		return false;
-	});
-
 });
