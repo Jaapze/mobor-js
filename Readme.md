@@ -50,6 +50,10 @@ To make a element link to another page u can use a anchor tag:
 ```html
 <a href="page_2.html">page 2</a>
 ```
+To make a anchor to a website outside of the app, add the class 'external':
+```html
+<a href="http://www.google.com" class="external">google.com/a>
+```
 You can also use other elements to link to another page:
 ```html
 <button class="navigate" data-url="page_2.html">page 2</button>
@@ -77,7 +81,7 @@ you can get the URL from this events with the 'URL' param
 
 usage:
 ```js
-$(document).on("page_loaded", handler);
+$(document).on('page_loaded', handler);
 
 function handler(e)
 {

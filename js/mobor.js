@@ -78,7 +78,9 @@ $(function(){
 	
 	$('body').delegate('a, .navigate', 'click', function(){
 		var elm				=	$(this);
-		
+		if(elm.hasClass('external')){
+			return true;
+		}
 		var attr_href		=	elm.attr('href');
 		var attr_trans		=	elm.data('transition');
 		var attr_dir		=	elm.data('direction');
