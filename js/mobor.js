@@ -66,7 +66,7 @@ $(function(){
 	{
 		$('.remove').remove();
 		$('.page').addClass('current');
-		navigation_done		=	true;
+		setTimeout(function(){navigation_done = true;},2);
 		$.event.trigger({
 			type:	'page_loaded',
 		});
