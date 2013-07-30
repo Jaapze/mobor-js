@@ -31,10 +31,10 @@ You can add data attributes to change the page transition or direction:
 ### Events
 
 There are some events during the navigation:
-####page_load
+**page_load**
 Triggers when a page is loading.
 
-####page_loaded
+**page_loaded**
 triggers when a page is loaded.
 
 you can get the URL from this events with the 'URL' param
