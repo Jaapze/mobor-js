@@ -22,6 +22,6 @@ You can add data attributes to change the page transition or direction:
 ```
 Transitions
 - slide (default)
-  # forward
-  # backward
+  - forward
+  - backward
 - fade
