@@ -50,11 +50,11 @@ $(function(){
 			case 'slide':
 				var from	=	(direction == 'forward')?'right':'left';
 				var to		=	(direction != 'forward')?'right':'left';
-				body.append(html.addClass(from));
+				body.append(html.addClass(from+' transition'));
 				setTimeout(function(){
-					html.removeClass(from).addClass('transition center');
+					html.removeClass(from).addClass('center');
 					$('.page.current').removeClass('current').addClass(to+' transition remove').removeClass('center');
-				},1);
+				},5);
 			break;
 			case 'fade':
 				body.append(html);
@@ -91,7 +91,7 @@ $(function(){
 		$('.page.fadeIn, .page.transition, .page.center').removeClass('fadeIn transition center');
 	}
 	
-	$('body').delegate('a, .navigate', 'touchstart click', function(){
+	$('body').delegate('a, .navigate', 'click touchstart', function(){
 		var elm				=	$(this);
 		if(elm.hasClass('external')){
 			return true;
