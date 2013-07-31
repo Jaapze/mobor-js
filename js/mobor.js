@@ -53,13 +53,18 @@ $(function(){
 				body.append(html.addClass(from));
 				setTimeout(function(){
 					html.removeClass(from).addClass('transition center');
-					$('.current').removeClass('current').addClass(to+' transition remove').removeClass('center');
+					$('.page.current').removeClass('current').addClass(to+' transition remove').removeClass('center');
 				},1);
 			break;
 			case 'fade':
 				body.append(html);
-				$('.current').removeClass('current').addClass('remove');
+				$('.page.current').removeClass('current').addClass('remove');
 				html.addClass('fadeIn current transition');
+			break;
+			case 'none':
+				body.append(html);
+				$('.page.current').removeClass('current').addClass('remove');
+				reset_pages();
 			break;
 		}
 		if(transition == 'slide')
@@ -76,14 +81,14 @@ $(function(){
 	
 	function reset_pages()
 	{
-		$('.remove').remove();
+		$('.page.remove').remove();
 		$('.page').addClass('current');
 		setTimeout(function(){navigation_done = true;},2);
 		$.event.trigger({
 			type:	'transition_done',
 			URL:	current_URL,
 		});
-		$('.fadeIn, .transition, .center').removeClass('fadeIn transition center');
+		$('.page.fadeIn, .page.transition, .page.center').removeClass('fadeIn transition center');
 	}
 	
 	$('body').delegate('a, .navigate', 'click', function(){

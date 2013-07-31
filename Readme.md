@@ -72,6 +72,7 @@ $.navigate('page-2.html', 'slide', 'forward');
   - forward (default)
   - backward
 - fade
+- none
 
 ### Events
 
