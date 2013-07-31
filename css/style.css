@@ -12,6 +12,10 @@ a{
 	padding: 10px;
 }
 
+ul{
+	line-height: 1.5em;
+}
+
 .page#index{
 	background: #f2f2f2;
 }
