@@ -14,7 +14,7 @@ $(function(){
 		$('.page').addClass('current');
 	}
 	
-	$.navigate = function extern_nav(URL, transition, direction) {
+	$.navigate = function(URL, transition, direction) {
 		transition = transition || 'slide';
 		direction = direction || 'forward';
 		navigation(URL, transition, direction);
