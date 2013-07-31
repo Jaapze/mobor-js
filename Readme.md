@@ -1,7 +1,7 @@
 # MOBOR JS 0.1.1
-Javascript tool to make a web app
+Jquery plugin to make a web app
 
-Tool is build on jquery 2.X
+The plugin is build on jquery 2.X
 
 Demo can be found here:
 http://www.atticweb.nl/mobor-js
