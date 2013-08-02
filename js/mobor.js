@@ -91,7 +91,7 @@ $(function(){
 		$('.page.fadeIn, .page.transition, .page.center').removeClass('fadeIn transition center');
 	}
 	
-	$('body').delegate('a, .navigate', 'click touchstart', function(){
+	$('body').delegate('a, .navigate', 'click touchend', function(){
 		var elm				=	$(this);
 		if(elm.hasClass('external')){
 			return true;
