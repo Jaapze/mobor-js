@@ -1,5 +1,5 @@
 $(function(){
-	var current_URL;
+	var current_URL			=	'index.html';
 	var navigation_done		=	true;
 	var body				=	$('body');
 	var config				= {
