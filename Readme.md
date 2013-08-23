@@ -81,19 +81,19 @@ There are some events during the navigation:
 Triggers when a page is loading.
 
 #####page_loaded
-triggers when a page is loaded.
+Triggers when a page is loaded.
 
 #####transition_done
-triggers when the transition of the page is done
+Triggers when the transition of the page is done.
 
-you can get the URL from this events with the 'URL' param
+You can get the URL from this events with the 'URL' param.
 
-usage:
+#####Usage:
 ```js
 $(document).on('page_loaded', handler);
 
 function handler(e)
 {
-	alert(e.URL+' is loaded');
+	alert(e.URL+' is loaded!');
 }
 ```
