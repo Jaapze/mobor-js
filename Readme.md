@@ -6,6 +6,13 @@ The plugin is build on jquery 2.X
 Demo can be found here:
 http://www.atticweb.nl/mobor-js
 
+* [File structure](https://github.com/Atticweb/mobor-js#file-structure)
+	* [Index](https://github.com/Atticweb/mobor-js#index)
+	* [Page](https://github.com/Atticweb/mobor-js#page)
+* [Navigation](https://github.com/Atticweb/mobor-js#navigation)
+	* [Transitions](https://github.com/Atticweb/mobor-js#transitions)
+	* [Events](https://github.com/Atticweb/mobor-js#events)
+
 ## File structure
 ###Index
 ```html
