@@ -60,7 +60,7 @@ You can also use other elements to link to another page:
 ```
 You can add data attributes to change the page transition or direction:
 ```html
-<a href="page_2" data-transition="slide" direction="forward">page 2</a>
+<a href="page_2.html" data-transition="slide" direction="forward">page 2</a>
 ```
 You can also do it with javascript:
 ```js
