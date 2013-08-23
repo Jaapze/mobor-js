@@ -2,6 +2,7 @@ $(function(){
 	var current_URL			=	'index.html';
 	var navigation_done		=	true;
 	var body				=	$('body');
+	var touch_click			=	("ontouchstart" in document.documentElement)?'touchend':'click';
 	var config				= {
 		'defaults':		{
 			'direction':	'forward',
@@ -91,7 +92,7 @@ $(function(){
 		$('.page.fadeIn, .page.transition, .page.center').removeClass('fadeIn transition center');
 	}
 	
-	$('body').delegate('a, .navigate', 'click touchend', function(){
+	$('body').delegate('a, .navigate', touch_click, function(){
 		var elm				=	$(this);
 		if(elm.hasClass('external')){
 			return true;
