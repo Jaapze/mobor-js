@@ -2,7 +2,8 @@ $(function(){
 	var current_URL			=	'index.html';
 	var navigation_done		=	true;
 	var body				=	$('body');
-	var touch_click			=	("ontouchstart" in document.documentElement)?'touchend':'click';
+	var touch_click					=	("ontouchstart" in document.documentElement)?'touchend':'click';
+	var touch_start_click			=	("ontouchstart" in document.documentElement)?'touchstart':'click';
 	var config				= {
 		'defaults':		{
 			'direction':	'forward',
@@ -92,7 +93,11 @@ $(function(){
 		$('.page.fadeIn, .page.transition, .page.center').removeClass('fadeIn transition center');
 	}
 	
-	$('body').delegate('a, .navigate', touch_click, function(){
+	$('body').delegate('a, .navigate', touch_start_click, function(event){
+		event.preventDefault();
+		return false;
+	});
+	$('body').delegate('a, .navigate', touch_click, function(event){
 		var elm				=	$(this);
 		if(elm.hasClass('external')){
 			return true;
@@ -106,6 +111,7 @@ $(function(){
 		var direction		=	(typeof attr_dir !== 'undefined' && attr_dir !== false) ? attr_dir : config.defaults.direction;
 		
 		navigation(URL, transition, direction);
+		event.preventDefault();
 		return false;
 	});
 	
