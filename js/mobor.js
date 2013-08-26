@@ -2,6 +2,7 @@ $(function(){
 	var current_URL			=	'index.html';
 	var navigation_done		=	true;
 	var body				=	$('body');
+	var dragging			=	false;
 	var touch_click					=	("ontouchstart" in document.documentElement)?'touchend':'click';
 	var touch_start_click			=	("ontouchstart" in document.documentElement)?'touchstart':'click';
 	var config				= {
@@ -10,6 +11,13 @@ $(function(){
 			'transition':	'slide',
 		},
 	};
+	
+	$("body").on("touchmove", function(){
+		dragging = true;
+	});
+	$("body").on("touchend", function(){
+		dragging = false;
+	});
 	
 	init();
 	function init(){
@@ -94,10 +102,17 @@ $(function(){
 	}
 	
 	$('body').delegate('a, .navigate', touch_start_click, function(event){
+		if(dragging){
+			return true;
+		}
 		event.preventDefault();
 		return false;
 	});
+	
 	$('body').delegate('a, .navigate', touch_click, function(event){
+		if(dragging){
+			return true;
+		}
 		var elm				=	$(this);
 		if(elm.hasClass('external')){
 			return true;
