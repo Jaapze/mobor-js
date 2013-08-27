@@ -101,8 +101,8 @@ $(function(){
 		$('.page.fadeIn, .page.transition, .page.center').removeClass('fadeIn transition center');
 	}
 	
-	$('body').delegate('a, .navigate', touch_start_click, function(event){
-		if(dragging){
+	$('body').delegate('a, .navigate', 'touchstart click', function(event){
+		if(dragging && elm.hasClass('external')){
 			return true;
 		}
 		event.preventDefault();
